@@ -31,7 +31,7 @@ int main()
   array = poparray;
 
   traverse(array,*len);
-  array = insert(array,10,5,len,size)
+  array = insert(array,10,5,len,size);
   cout << "\n";
   traverse(array,*len);
 
