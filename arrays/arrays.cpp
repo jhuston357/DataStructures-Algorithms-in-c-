@@ -10,8 +10,8 @@ using namespace std;
 
 //function declarations
 void traverse(int array[],int len);
-int * insert(int array[],int newitem,int pos,int *len, int *size);
-
+int * insert(int * array ,int newitem,int pos,int *len, int *size);
+int * remove(int * array,int pos,int *len, int *size);
 
 //main
 int main()
@@ -32,6 +32,9 @@ int main()
 
   traverse(array,*len);
   array = insert(array,10,5,len,size);
+  cout << "\n";
+  traverse(array,*len);
+  array = remove(array,5,len,size);
   cout << "\n";
   traverse(array,*len);
 
@@ -55,6 +58,7 @@ void traverse(int array[],int len)
 
 }
 
+//insert element to a specific position
 int * insert(int * array,int newitem,int pos,int *len, int *size)
 {
 
@@ -90,6 +94,49 @@ int * insert(int * array,int newitem,int pos,int *len, int *size)
     {
 
       newarray[i] = array[i-1];
+
+    }
+
+
+  }
+
+  return newarray;
+
+}
+
+//delete a specific element
+int * remove(int * array,int pos,int *len, int *size)
+{
+
+  //if array is < half full make it half the size
+  if(*len < (*size) / 2)
+  {
+
+    *size = (*size)*2;
+
+  }
+
+  //subtract one on to length because we are deleting
+  *len = *len - 1;
+
+  //initialize new array to delete item
+  int *newarray = new int[*size];
+
+  // loop through and populate the new array with the old array data
+  for(int i=0; i < *len; i++)
+  {
+
+
+    if(i<pos)//fill all less than than new item pos
+    {
+
+      newarray[i] = array[i];
+
+    }
+    else if (i > pos) // fill all over new item position
+    {
+
+      newarray[i-1] = array[i];
 
     }
 
