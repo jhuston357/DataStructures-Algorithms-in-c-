@@ -2,16 +2,21 @@
 //Traverse
 //Insertion
 //Deletion
-//Search
+//Sort
+//Binary Search
 //Update
 
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 //function declarations
+int rand();
 void traverse(int array[],int len);
 int * insert(int * array ,int newitem,int pos,int *len, int *size);
 int * remove(int * array,int pos,int *len, int *size);
+int * sort(int * array,int start,int end,int len);
+int * slice(int * array,int start,int end);
 
 //main
 int main()
@@ -26,11 +31,21 @@ int main()
   *size = 8;
 
   //initialize array
-  int poparray[] = {2,8,4,17,11,12,1,8};
-  int *array;
-  array = poparray;
+  int *array = new int[*size];
 
+  for(int i = 0; i<*size; i++)
+  {
+
+    array[i] = rand()%25;
+
+  }
+
+  cout << "\n";
   traverse(array,*len);
+  cout << "\n";
+  int * array2 = slice(array,0,5);
+  traverse(array2,6);
+  delete [] array2;
   array = insert(array,10,5,len,size);
   cout << "\n";
   traverse(array,*len);
@@ -100,6 +115,7 @@ int * insert(int * array,int newitem,int pos,int *len, int *size)
 
   }
 
+  delete [] array;
   return newarray;
 
 }
@@ -115,9 +131,6 @@ int * remove(int * array,int pos,int *len, int *size)
     *size = (*size)*2;
 
   }
-
-  //subtract one on to length because we are deleting
-  *len = *len - 1;
 
   //initialize new array to delete item
   int *newarray = new int[*size];
@@ -140,6 +153,42 @@ int * remove(int * array,int pos,int *len, int *size)
 
     }
 
+
+  }
+
+  //subtract one on to length because we are deleting
+  *len = *len - 1;
+
+  delete [] array;
+  return newarray;
+
+}
+
+
+
+int * sort(int * array,int start,int end,int len)
+{
+
+  int * newarray = new int[(end - start)+1];
+
+  sort(array,0,len/2,len/2);
+  sort(array,len/2,len,len/2);
+
+  return newarray;
+
+}
+
+int * slice(int * array,int start,int end)
+{
+
+  int count = 0;
+  int * newarray = new int[((end - start)+1)];
+
+  for(int i = start; i <= end; i++)
+  {
+
+    newarray[count] = array[i];
+    count++;
 
   }
 
