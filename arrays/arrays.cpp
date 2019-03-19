@@ -166,15 +166,37 @@ int * remove(int * array,int pos,int *len, int *size)
 
 
 
-int * sort(int * array,int start,int end,int len)
+void mergesort(int * array,int start,int end)
 {
 
-  int * newarray = new int[(end - start)+1];
+  if(start < end)
+  {
 
-  sort(array,0,len/2,len/2);
-  sort(array,len/2,len,len/2);
+    int middle = (end + start)/2;
 
-  return newarray;
+    mergesort(array,start,middle);
+    mergesort(array,middle+1,end);
+    merge(array,start,middle,end);
+
+  }
+
+  int * merge(int * array, start, middle, end)
+  {
+
+    for(int i = start; i<middle; i++)
+    {
+
+      for(int j = middle; j<= end)
+      {
+
+        if()
+
+      }
+
+    }
+
+  }
+
 
 }
 
